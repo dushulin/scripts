@@ -68,9 +68,8 @@ def toNewText(jsonObjList, fileName):
     allLine = []
 
     print("start append")
+    starIndex = -1
     for line in file.readlines():
-        # if flag == 0:
-        # starIndex = -1
         if startKey in line:
             print("find startKey, index: " + listIndex.__str__() + ", start one of overwrite...")
             flag = 1
@@ -115,7 +114,7 @@ def toNewText(jsonObjList, fileName):
                 print("useless line, no need keep, skip this line")
                 continue
         else:
-            if "*/" in line:
+            if starIndex != -1 and line.strip() == "*/":
                 # 对齐最后一行注释的*号
                 allLine.append(f'{" " * starIndex}{line.strip()}' + "\n")
             else:
